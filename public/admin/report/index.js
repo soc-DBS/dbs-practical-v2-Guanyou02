@@ -129,6 +129,10 @@ window.addEventListener('DOMContentLoaded', function () {
                 table.style.display = "table";
                 // Render the body modules into the table with table body id="module-tbody
                 const tbody = document.querySelector("#module-performance-tbody");
+                
+                // Clear previous table rows
+                tbody.innerHTML = "";
+
                 const performances = body.performance;
                 for (let i = 0; i < performances.length; i += 1) {
                     const performance = performances[i];
