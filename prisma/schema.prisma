@@ -24,6 +24,9 @@ model department {
   budget           Decimal?  @db.Decimal(9, 2)
   expenditure      Decimal?  @db.Decimal(9, 2)
   hodApptDate      DateTime? @map("hod_appt_date") @db.Date
+
+  departmentHodToStaff staff @relation("departmentHodToStaff", fields: [hod], references: [staffNo], onDelete: NoAction, onUpdate: NoAction, map: "dept_hod_fk")
+  staffDeptCodeToDepartment staff[] @relation("staffDeptCodeToDepartment")
 }
 
 model staff {
@@ -43,6 +46,11 @@ model staff {
   typeOfEmployment  String   @map("type_of_employment") @db.VarChar(2)
   highestQln        String   @map("highest_qln") @db.VarChar(10)
   designation       String   @db.VarChar(20)
+
+  staffDependent staffDependent[]
+
+  staffDeptCodeToDepartment department @relation("staffDeptCodeToDepartment", fields: [deptCode], references: [deptCode], onDelete: NoAction, onUpdate: NoAction, map: "fk_staff_dept_code")
+  departmentHodToStaff department[] @relation("departmentHodToStaff")
 }
 
 model staffBackup {
@@ -80,4 +88,58 @@ model userRole {
   name String @db.VarChar(25)
 
   @@map("user_role")
+}
+
+model module {
+ modCode String @id @map("mod_code") @db.VarChar(10) //Change this field’s type
+ modName String @map("mod_name") @db.VarChar(100)
+ creditUnit Int @map("credit_unit")
+ modCoord String? @map("mod_coord") @db.Char(4) //Add this field
+}
+
+model staffDependent {
+  staffNo String @map("staff_no") @db.Char(4)
+  dependentName String @map("dependent_name") @db.VarChar(30)
+  relationship String @db.VarChar(20)
+
+  staff staff @relation(fields: [staffNo], references: [staffNo], map: "staff_dependent_staff_no_fk")
+
+  @@id([staffNo, dependentName])
+  @@map("staff_dependent")
+}
+
+model preRequisite {
+  modCode String @map("mod_code") @db.VarChar(10)
+  requisite String @db.VarChar(10)
+
+  @@id([modCode, requisite])
+  @@map("pre_requisite")
+}
+
+model country {
+  countryName String @id @map("country_name") @db.VarChar(30)
+  language String @db.VarChar(30)
+  region String @db.VarChar(30)
+}
+
+model student {
+  admNo String @id @map("adm_no") @db.Char(4)
+  studName String @map("stud_name") @db.VarChar(30)
+  gender String @db.Char(1)
+  address String @db.VarChar(100)
+  mobilePhone String @map("mobile_phone") @db.Char(8)
+  homePhone String @map("home_phone") @db.Char(8)
+  dob DateTime @db.Date
+  nationality String @db.VarChar(30)
+  crseCode String @map("crse_code") @db.VarChar(5)
+}
+
+model studModPerformance {
+  admNo String @map("adm_no") @db.Char(4)
+  modRegistered String @map("mod_registered") @db.VarChar(10)
+  mark Int
+  grade String @db.Char(2)
+
+  @@id([admNo, modRegistered])
+  @@map("stud_mod_performance")
 }
