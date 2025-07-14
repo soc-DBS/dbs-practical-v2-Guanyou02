@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "student" ALTER COLUMN "dob" SET DATA TYPE DATE;
