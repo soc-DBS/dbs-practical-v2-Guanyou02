@@ -1,4 +1,67 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Module Management | Delete</title>
+  <link href="/main.css" rel="stylesheet" />
+  <link href="./index.css" rel="stylesheet" />
+  <script src="./index.js" type="text/javascript"></script>
+  <style>
+    /* body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    } */
+    form {
+      max-width: 400px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    select, button {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Staff Transfer Form</h2>
+
+  <form action="/submit-transfer" method="post">
+    <label for="staff_no">Select Staff Member:</label>
+    <select name="staff_no" id="staff_no" required>
+      <option value="">-- Please select --</option>
+      <option value="S001">S001 – HOD</option>
+      <option value="S020">S020 – Mod Coordinator</option>
+      <option value="S002">S002 – Supervisor</option>
+    </select>
+
+    <label for="department">Transfer to Department:</label>
+    <select name="department" id="department" required>
+      <option value="">-- Please select --</option>
+      <option value="SOC">SOC – School of Computing</option>
+      <option value="SB">SB – School of Business</option>
+      <option value="PO">PO – Principal’s Office</option>
+      <option value="DPO">DPO – Deputy Principal’s Office</option>
+    </select>
+
+    <button type="submit">Transfer Staff</button>
+  </form>
+
+</body>
+</html>
+
+<!-- <html>
 
 <head>
     <title>Module Management | Delete</title>
@@ -38,4 +101,4 @@
     <script src="../authAdmin.js" type="text/javascript"></script>
 </body>
 
-</html>
+</html> -->
